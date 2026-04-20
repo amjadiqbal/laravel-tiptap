@@ -27,4 +27,11 @@ class ExtensionRegistryTest extends TestCase
 
         (new ExtensionRegistry([]))->resolve('Unknown');
     }
+
+    public function test_it_rejects_unsafe_import_paths(): void
+    {
+        $this->expectException(InvalidExtensionException::class);
+
+        (new ExtensionRegistry([]))->register(new Extension('Unsafe', 'https://malicious.example/ext.js'));
+    }
 }

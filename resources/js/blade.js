@@ -1,11 +1,14 @@
 import { Editor } from '@tiptap/core';
 
+const isSafeImportPath = (path) => /^@tiptap\/[a-z0-9-/]+$/i.test(path);
+
 const resolveExtensions = async (definitions = []) => {
   const loaded = [];
 
   for (const definition of definitions) {
     if (!definition?.enabled) continue;
     if (!definition.import) continue;
+    if (!isSafeImportPath(definition.import)) continue;
 
     const module = await import(/* @vite-ignore */ definition.import);
     const extensionClass = module.default ?? module[definition.name] ?? Object.values(module)[0];
