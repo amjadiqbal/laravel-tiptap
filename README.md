@@ -93,7 +93,7 @@ php artisan tiptap:debug
 ## Support
 
 - Issues: https://github.com/amjadiqbal/laravel-tiptap/issues
-- Email: support@example.com
+- Email: amjadiqbal@users.noreply.github.com
 
 ## Community
 

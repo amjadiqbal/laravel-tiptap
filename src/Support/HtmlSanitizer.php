@@ -27,11 +27,7 @@ class HtmlSanitizer implements Sanitizer
             return strip_tags($content);
         }
 
-        $tagString = '';
-
-        foreach ($this->allowedTags as $tag) {
-            $tagString .= "<{$tag}>";
-        }
+        $tagString = implode('', array_map(static fn (string $tag): string => "<{$tag}>", $this->allowedTags));
 
         return strip_tags($content, $tagString);
     }
