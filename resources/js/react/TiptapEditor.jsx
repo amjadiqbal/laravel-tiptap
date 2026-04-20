@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 
+const isSafeImportPath = (path) => /^@tiptap\/[a-z0-9-/]+$/i.test(path);
+
 export default function TiptapEditor({ config, value, onChange, onCreate, onUpdate, onFocus, onBlur }) {
   const extensionDefinitions = useMemo(() => config?.extensions || [], [config?.extensions]);
   const [extensions, setExtensions] = useState([]);
@@ -13,6 +15,7 @@ export default function TiptapEditor({ config, value, onChange, onCreate, onUpda
 
       for (const definition of extensionDefinitions) {
         if (!definition?.enabled || !definition?.import) continue;
+        if (!isSafeImportPath(definition.import)) continue;
 
         const module = await import(/* @vite-ignore */ definition.import);
         const extensionClass = module.default ?? module[definition.name] ?? Object.values(module)[0];

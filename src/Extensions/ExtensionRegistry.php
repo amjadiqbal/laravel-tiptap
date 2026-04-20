@@ -27,6 +27,10 @@ class ExtensionRegistry
             throw InvalidExtensionException::because('Extension name cannot be empty.');
         }
 
+        if ($extension->import !== null && ! preg_match('/^@tiptap\\/[a-z0-9\\/-]+$/i', $extension->import)) {
+            throw InvalidExtensionException::because("Extension import [{$extension->import}] is not allowed.");
+        }
+
         $this->extensions[$extension->name] = $extension;
 
         return $this;
