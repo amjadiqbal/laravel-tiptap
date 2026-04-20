@@ -17,6 +17,7 @@ return [
         'disk' => env('TIPTAP_UPLOAD_DISK', env('FILESYSTEM_DISK', 'public')),
         'directory' => env('TIPTAP_UPLOAD_DIRECTORY', 'tiptap/uploads'),
         'visibility' => env('TIPTAP_UPLOAD_VISIBILITY', 'public'),
+        'require_auth' => (bool) env('TIPTAP_UPLOAD_REQUIRE_AUTH', false),
         'max_size_kb' => 5120,
         'mimes' => ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'],
     ],
@@ -31,6 +32,6 @@ return [
 
     'support' => [
         'issues' => 'https://github.com/amjadiqbal/laravel-tiptap/issues',
-        'email' => 'support@example.com',
+        'email' => env('TIPTAP_SUPPORT_EMAIL', 'amjadiqbal@users.noreply.github.com'),
     ],
 ];

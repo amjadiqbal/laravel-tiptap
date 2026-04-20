@@ -10,7 +10,11 @@ class TiptapUploadRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        if (! (bool) config('tiptap.upload.require_auth', false)) {
+            return true;
+        }
+
+        return $this->user() !== null;
     }
 
     public function rules(): array

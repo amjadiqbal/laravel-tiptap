@@ -1,12 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 
-const useResolvedExtensions = (extensions = []) => {
-  return extensions;
-};
-
 export default function TiptapEditor({ config, value, onChange, onCreate, onUpdate, onFocus, onBlur }) {
-  const extensions = useResolvedExtensions(config?.extensions || []);
+  const extensionDefinitions = useMemo(() => config?.extensions || [], [config?.extensions]);
+  const [extensions, setExtensions] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const resolveExtensions = async () => {
+      const loaded = [];
+
+      for (const definition of extensionDefinitions) {
+        if (!definition?.enabled || !definition?.import) continue;
+
+        const module = await import(/* @vite-ignore */ definition.import);
+        const extensionClass = module.default ?? module[definition.name] ?? Object.values(module)[0];
+
+        if (!extensionClass) continue;
+
+        loaded.push(typeof extensionClass.configure === 'function' ? extensionClass.configure(definition.config ?? {}) : extensionClass);
+      }
+
+      if (mounted) {
+        setExtensions(loaded);
+      }
+    };
+
+    resolveExtensions();
+
+    return () => {
+      mounted = false;
+    };
+  }, [extensionDefinitions]);
 
   const editor = useEditor({
     ...(config?.options || {}),
