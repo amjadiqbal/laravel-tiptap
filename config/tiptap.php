@@ -8,7 +8,9 @@ return [
     'route' => [
         'enabled' => true,
         'prefix' => 'tiptap',
-        'middleware' => ['web', 'throttle:tiptap-uploads'],
+        'middleware' => ['web'],
+        'rate_limiter' => 'tiptap-uploads',
+        'uploads_per_minute' => 30,
     ],
 
     'upload' => [

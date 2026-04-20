@@ -1,14 +1,20 @@
 # Laravel Tiptap
 
-Professional Laravel (11+) package for Tiptap with fluent backend configuration, secure upload handling, and Blade/Vue/React integration.
+A modern Laravel (11+) package for Tiptap with backend-driven editor configuration, secure upload handling, and Blade/Vue/React integrations.
+
+## Why this package
+
+- Fluent PHP builder mirroring core Tiptap editor options
+- Dynamic extension registry for built-in and custom extensions
+- Command/event/input-rule/paste-rule serialization for frontend execution
+- JSON-first content handling with parser, transformer, and sanitizer contracts
+- Secure upload endpoint with validation, CSRF, and rate limiting
 
 ## Installation
 
 ```bash
 composer require amjadiqbal/laravel-tiptap
 ```
-
-Publish config:
 
 ```bash
 php artisan vendor:publish --tag=tiptap-config
@@ -20,7 +26,7 @@ php artisan vendor:publish --tag=tiptap-config
 use AmjadIqbal\LaravelTiptap\Facades\Tiptap;
 
 $config = Tiptap::make()
-    ->extensions(['StarterKit', 'Bold', 'Italic'])
+    ->extensions(['StarterKit', 'Bold', 'Italic', 'Link'])
     ->content(['type' => 'doc', 'content' => []])
     ->editable(true)
     ->autofocus('end')
@@ -29,19 +35,23 @@ $config = Tiptap::make()
     ->toArray();
 ```
 
-## Blade
-
 ```blade
-<x-tiptap-editor name="content" id="post-content" :content="$post->content" />
+<x-tiptap-editor name="content" id="editor" :content="$post->content" />
 ```
 
-## Vue 3 / React
+## Built-in extension definitions
 
-Use components in `resources/js/vue/TiptapEditor.vue` and `resources/js/react/TiptapEditor.jsx` with backend config payload.
+- StarterKit
+- Bold, Italic, Heading
+- Image, Link, CodeBlock
+- Table
+- BulletList, OrderedList, ListItem
 
-## Upload API
+## Upload endpoint
 
-`POST /tiptap/upload` (web + throttle middleware) returns:
+`POST /tiptap/upload`
+
+Response shape:
 
 ```json
 {
@@ -56,16 +66,29 @@ Use components in `resources/js/vue/TiptapEditor.vue` and `resources/js/react/Ti
 
 ## Security
 
-- Content sanitization support
-- Upload MIME and size validation
-- CSRF via web middleware
-- Rate limiting via throttle middleware
+- Sanitization contract and default HTML sanitizer
+- Upload MIME and max-size validation
+- CSRF protections via `web` middleware
+- Named rate limiter for uploads (`tiptap-uploads`)
 
-## Artisan Support
+## Diagnostics
 
 ```bash
 php artisan tiptap:debug
 ```
+
+## Documentation
+
+- [Installation Guide](docs/installation.md)
+- [Usage Examples](docs/usage.md)
+- [Extension Creation Guide](docs/extensions.md)
+- [API Reference](docs/api-reference.md)
+- [Analysis of Existing Packages](docs/analysis-existing-packages.md)
+
+## CI/CD and versioning
+
+- CI workflow runs tests, Laravel Pint, and PHPStan
+- Release workflow triggers on semantic version tags (`v*.*.*`)
 
 ## Support
 
@@ -74,6 +97,8 @@ php artisan tiptap:debug
 
 ## Community
 
+- [Contributing Guide](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 - Buy Me a Coffee: https://www.buymeacoffee.com/amjadiqbal
 - GitHub Sponsors: https://github.com/sponsors/amjadiqbal
 

@@ -11,7 +11,10 @@ if (! config('tiptap.route.enabled', true)) {
 
 Route::group([
     'prefix' => config('tiptap.route.prefix', 'tiptap'),
-    'middleware' => config('tiptap.route.middleware', ['web']),
+    'middleware' => array_merge(
+        config('tiptap.route.middleware', ['web']),
+        ['throttle:' . config('tiptap.route.rate_limiter', 'tiptap-uploads')]
+    ),
 ], function (): void {
     Route::post('/upload', TiptapUploadController::class)->name('tiptap.upload');
 });
