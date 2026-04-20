@@ -77,6 +77,11 @@ Response shape:
 php artisan tiptap:debug
 ```
 
+## Contributor test requirements
+
+- Package runtime support: PHP 8.2+
+- Local package test tooling (PHPUnit 12): PHP 8.3+
+
 ## Documentation
 
 - [Installation Guide](docs/installation.md)
