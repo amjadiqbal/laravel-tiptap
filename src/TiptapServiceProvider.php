@@ -16,7 +16,9 @@ use AmjadIqbal\LaravelTiptap\Support\DefaultContentTransformer;
 use AmjadIqbal\LaravelTiptap\Support\HtmlSanitizer;
 use AmjadIqbal\LaravelTiptap\View\Components\TiptapEditor;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
 
 class TiptapServiceProvider extends ServiceProvider
 {
@@ -43,6 +45,10 @@ class TiptapServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        RateLimiter::for((string) config('tiptap.route.rate_limiter', 'tiptap-uploads'), static function () {
+            return Limit::perMinute((int) config('tiptap.route.uploads_per_minute', 30));
+        });
+
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-tiptap');
         $this->loadRoutesFrom(__DIR__ . '/../routes/tiptap.php');
 
