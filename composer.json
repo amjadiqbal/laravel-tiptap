@@ -1,0 +1,58 @@
+{
+  "name": "amjadiqbal/laravel-tiptap",
+  "description": "Best-in-class Laravel integration for Tiptap with fluent editor configuration, secure content handling, uploads, and multi-framework frontend components.",
+  "keywords": [
+    "laravel",
+    "tiptap",
+    "editor",
+    "wysiwyg",
+    "rich-text"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "AmjadIqbal"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "illuminate/contracts": "^11.0|^12.0",
+    "illuminate/support": "^11.0|^12.0",
+    "illuminate/http": "^11.0|^12.0",
+    "illuminate/routing": "^11.0|^12.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^9.0",
+    "phpunit/phpunit": "^11.0",
+    "laravel/pint": "^1.0",
+    "phpstan/phpstan": "^1.11"
+  },
+  "autoload": {
+    "psr-4": {
+      "AmjadIqbal\\LaravelTiptap\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AmjadIqbal\\LaravelTiptap\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "AmjadIqbal\\LaravelTiptap\\TiptapServiceProvider"
+      ],
+      "aliases": {
+        "Tiptap": "AmjadIqbal\\LaravelTiptap\\Facades\\Tiptap"
+      }
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "pint": "pint --test",
+    "analyse": "phpstan analyse"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
