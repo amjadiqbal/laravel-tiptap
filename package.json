@@ -1,0 +1,13 @@
+{
+  "name": "laravel-tiptap",
+  "private": false,
+  "version": "0.1.0",
+  "type": "module",
+  "peerDependencies": {
+    "@tiptap/core": "^2.0.0",
+    "@tiptap/vue-3": "^2.0.0",
+    "@tiptap/react": "^2.0.0",
+    "react": "^18.0.0",
+    "vue": "^3.0.0"
+  }
+}
