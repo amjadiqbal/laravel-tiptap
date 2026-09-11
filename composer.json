@@ -12,7 +12,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "AmjadIqbal"
+            "name": "Amjad Iqbal",
+            "homepage": "https://amjad.com.pk",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -54,5 +56,11 @@
         "analyse": "phpstan analyse"
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "homepage": "https://github.com/AmjadIqbal/laravel-tiptap",
+    "support": {
+        "email": "hi@amjad.com.pk",
+        "issues": "https://github.com/AmjadIqbal/laravel-tiptap/issues",
+        "source": "https://github.com/AmjadIqbal/laravel-tiptap"
+    }
 }
