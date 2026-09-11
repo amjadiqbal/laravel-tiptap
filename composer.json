@@ -26,7 +26,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "^9.0",
-        "phpunit/phpunit": "^12.5.22",
+        "phpunit/phpunit": "^11.3|^12.0.1",
         "laravel/pint": "^1.0",
         "phpstan/phpstan": "^1.11"
     },
@@ -57,6 +57,12 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "8.2.0"
+        },
+        "audit": {}
+    },
     "homepage": "https://github.com/AmjadIqbal/laravel-tiptap",
     "support": {
         "email": "hi@amjad.com.pk",
