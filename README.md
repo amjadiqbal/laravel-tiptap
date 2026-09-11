@@ -110,3 +110,7 @@ php artisan tiptap:debug
 ## License
 
 MIT
+
+## Author
+
+**Amjad Iqbal** — [amjad.com.pk](https://amjad.com.pk) · [hi@amjad.com.pk](mailto:hi@amjad.com.pk) · [GitHub](https://github.com/AmjadIqbal)
