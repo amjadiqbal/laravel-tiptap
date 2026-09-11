@@ -13,7 +13,7 @@ Route::group([
     'prefix' => config('tiptap.route.prefix', 'tiptap'),
     'middleware' => array_merge(
         config('tiptap.route.middleware', ['web']),
-        ['throttle:' . config('tiptap.route.rate_limiter', 'tiptap-uploads')]
+        ['throttle:'.config('tiptap.route.rate_limiter', 'tiptap-uploads')]
     ),
 ], function (): void {
     Route::post('/upload', TiptapUploadController::class)->name('tiptap.upload');

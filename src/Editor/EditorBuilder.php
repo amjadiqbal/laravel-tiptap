@@ -16,6 +16,9 @@ use AmjadIqbal\LaravelTiptap\Extensions\ExtensionRegistry;
 use Illuminate\Contracts\Support\Arrayable;
 use JsonSerializable;
 
+/**
+ * @implements Arrayable<string, mixed>
+ */
 class EditorBuilder implements Arrayable, JsonSerializable
 {
     /** @var array<int, array<string, mixed>> */
@@ -72,6 +75,7 @@ class EditorBuilder implements Arrayable, JsonSerializable
         return $this;
     }
 
+    /** @param array<string,mixed>|Extension|string $extension */
     public function addExtension(string|array|Extension $extension): self
     {
         if ($extension instanceof Extension) {
@@ -87,6 +91,7 @@ class EditorBuilder implements Arrayable, JsonSerializable
         return $this;
     }
 
+    /** @param array<string,mixed>|string|null $content */
     public function content(array|string|null $content): self
     {
         $this->options['content'] = $this->parser->parse($content);
@@ -159,6 +164,7 @@ class EditorBuilder implements Arrayable, JsonSerializable
         return $this;
     }
 
+    /** @param bool|array<int,string> $enabled */
     public function enableCoreExtensions(bool|array $enabled = true): self
     {
         $this->options['enableCoreExtensions'] = $enabled;
@@ -274,6 +280,7 @@ class EditorBuilder implements Arrayable, JsonSerializable
         return $this->chain;
     }
 
+    /** @param array<string,mixed>|string|null $content */
     public function setContent(array|string|null $content, bool $emitUpdate = true): self
     {
         return $this->command('setContent', [
@@ -308,6 +315,7 @@ class EditorBuilder implements Arrayable, JsonSerializable
         return $this->transformer->transform($this->options['content'] ?? null, $targetFormat, $context);
     }
 
+    /** @return array<string,mixed> */
     public function toArray(): array
     {
         return [
@@ -323,6 +331,7 @@ class EditorBuilder implements Arrayable, JsonSerializable
         ];
     }
 
+    /** @return array<string,mixed> */
     public function jsonSerialize(): array
     {
         return $this->toArray();

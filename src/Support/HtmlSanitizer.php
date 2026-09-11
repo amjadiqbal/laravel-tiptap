@@ -9,10 +9,12 @@ use AmjadIqbal\LaravelTiptap\Contracts\Sanitizer;
 class HtmlSanitizer implements Sanitizer
 {
     /** @param array<int,string> $allowedTags */
-    public function __construct(private readonly array $allowedTags = [])
-    {
-    }
+    public function __construct(private readonly array $allowedTags = []) {}
 
+    /**
+     * @param  array<string,mixed>|string|null  $content
+     * @return array<string,mixed>|string|null
+     */
     public function sanitize(array|string|null $content): array|string|null
     {
         if (is_array($content)) {

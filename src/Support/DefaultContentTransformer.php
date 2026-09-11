@@ -8,6 +8,8 @@ use AmjadIqbal\LaravelTiptap\Contracts\ContentTransformer;
 
 class DefaultContentTransformer implements ContentTransformer
 {
+    /** @param array<string,mixed>|string|null $content
+     * @param array<string,mixed> $context */
     public function transform(array|string|null $content, string $targetFormat, array $context = []): mixed
     {
         if ($targetFormat === 'json') {

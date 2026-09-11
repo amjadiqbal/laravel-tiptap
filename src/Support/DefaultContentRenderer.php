@@ -8,6 +8,8 @@ use AmjadIqbal\LaravelTiptap\Contracts\ContentRenderer;
 
 class DefaultContentRenderer implements ContentRenderer
 {
+    /** @param array<string,mixed>|string|null $content
+     * @param array<string,mixed> $context */
     public function render(array|string|null $content, array $context = []): string
     {
         if (is_string($content)) {

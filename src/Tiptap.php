@@ -19,8 +19,7 @@ class Tiptap
         private readonly ContentRenderer $renderer,
         private readonly ContentTransformer $transformer,
         private readonly Sanitizer $sanitizer,
-    ) {
-    }
+    ) {}
 
     public function make(): EditorBuilder
     {

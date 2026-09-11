@@ -30,7 +30,7 @@ class TiptapDebugCommand extends Command
 
     private function packageVersion(): string
     {
-        $composerPath = __DIR__ . '/../../../composer.json';
+        $composerPath = __DIR__.'/../../../composer.json';
         if (! is_file($composerPath)) {
             return 'unknown';
         }

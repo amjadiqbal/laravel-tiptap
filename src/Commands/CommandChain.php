@@ -6,6 +6,9 @@ namespace AmjadIqbal\LaravelTiptap\Commands;
 
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * @implements Arrayable<int, array<string, mixed>>
+ */
 class CommandChain implements Arrayable
 {
     /** @var array<int, Command> */
@@ -24,11 +27,13 @@ class CommandChain implements Arrayable
         return $this->push(new Command($name, $payload));
     }
 
+    /** @return array<int,array<string,mixed>> */
     public function run(): array
     {
         return $this->toArray();
     }
 
+    /** @return array<int,array<string,mixed>> */
     public function toArray(): array
     {
         return array_map(static fn (Command $command): array => $command->toArray(), $this->commands);
