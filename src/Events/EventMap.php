@@ -6,6 +6,9 @@ namespace AmjadIqbal\LaravelTiptap\Events;
 
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * @implements Arrayable<string, string|null>
+ */
 class EventMap implements Arrayable
 {
     /** @var array<string,string|null> */

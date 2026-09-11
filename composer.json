@@ -53,7 +53,7 @@
     "scripts": {
         "test": "phpunit",
         "pint": "pint --test",
-        "analyse": "phpstan analyse"
+        "analyse": "phpstan analyse --memory-limit=1G"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,

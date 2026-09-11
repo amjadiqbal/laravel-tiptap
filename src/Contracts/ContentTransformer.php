@@ -6,6 +6,9 @@ namespace AmjadIqbal\LaravelTiptap\Contracts;
 
 interface ContentTransformer
 {
-    /** @param array<string,mixed> $context */
+    /**
+     * @param  array<string,mixed>|string|null  $content
+     * @param  array<string,mixed>  $context
+     */
     public function transform(array|string|null $content, string $targetFormat, array $context = []): mixed;
 }

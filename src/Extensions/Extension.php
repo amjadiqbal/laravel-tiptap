@@ -6,6 +6,9 @@ namespace AmjadIqbal\LaravelTiptap\Extensions;
 
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * @implements Arrayable<string, mixed>
+ */
 class Extension implements Arrayable
 {
     /** @param array<string,mixed> $config */
@@ -14,8 +17,7 @@ class Extension implements Arrayable
         public readonly ?string $import = null,
         public readonly array $config = [],
         public readonly bool $enabled = true,
-    ) {
-    }
+    ) {}
 
     /** @param array<string,mixed> $data */
     public static function fromArray(array $data): self
@@ -28,6 +30,7 @@ class Extension implements Arrayable
         );
     }
 
+    /** @return array<string,mixed> */
     public function toArray(): array
     {
         return [

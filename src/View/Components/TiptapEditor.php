@@ -10,7 +10,10 @@ use Illuminate\View\Component;
 
 class TiptapEditor extends Component
 {
-    /** @param array<int, string|array<string,mixed>> $extensions */
+    /**
+     * @param  array<string,mixed>|string|null  $content
+     * @param  array<int, string|array<string,mixed>>  $extensions
+     */
     public function __construct(
         public readonly string $name = 'content',
         public readonly string $id = 'tiptap-editor',
@@ -18,8 +21,7 @@ class TiptapEditor extends Component
         public readonly array|string|null $content = null,
         public readonly array $extensions = [],
         public readonly bool $editable = true,
-    ) {
-    }
+    ) {}
 
     public function render(): View
     {

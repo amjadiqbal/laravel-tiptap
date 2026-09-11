@@ -22,6 +22,7 @@ class TiptapUploadController extends Controller
 
         return response()->json([
             'success' => true,
+            // @phpstan-ignore-next-line method.notFound (Filesystem contract omits url(); concrete adapters implement it)
             'url' => Storage::disk($disk)->url($path),
             'path' => $path,
             'name' => $file->getClientOriginalName(),

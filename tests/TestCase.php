@@ -16,8 +16,9 @@ abstract class TestCase extends Orchestra
 
     protected function defineEnvironment($app): void
     {
+        $app['config']->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
         $app['config']->set('database.default', 'testing');
         $app['config']->set('filesystems.default', 'local');
-        $app['config']->set('filesystems.disks.local.root', __DIR__ . '/tmp-storage');
+        $app['config']->set('filesystems.disks.local.root', __DIR__.'/tmp-storage');
     }
 }

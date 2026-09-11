@@ -9,6 +9,10 @@ use AmjadIqbal\LaravelTiptap\Exceptions\InvalidContentException;
 
 class DefaultContentParser implements ContentParser
 {
+    /**
+     * @param  array<string,mixed>|string|null  $content
+     * @return array<string,mixed>|string|null
+     */
     public function parse(array|string|null $content): array|string|null
     {
         if (! is_string($content)) {

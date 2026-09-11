@@ -17,6 +17,7 @@ class TiptapUploadRequest extends FormRequest
         return $this->user() !== null;
     }
 
+    /** @return array<string,mixed> */
     public function rules(): array
     {
         $mimes = implode(',', config('tiptap.upload.mimes', ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg']));
@@ -25,8 +26,8 @@ class TiptapUploadRequest extends FormRequest
             'file' => [
                 'required',
                 'file',
-                'mimes:' . $mimes,
-                'max:' . (int) config('tiptap.upload.max_size_kb', 5120),
+                'mimes:'.$mimes,
+                'max:'.(int) config('tiptap.upload.max_size_kb', 5120),
             ],
         ];
     }

@@ -15,16 +15,16 @@ use AmjadIqbal\LaravelTiptap\Support\DefaultContentRenderer;
 use AmjadIqbal\LaravelTiptap\Support\DefaultContentTransformer;
 use AmjadIqbal\LaravelTiptap\Support\HtmlSanitizer;
 use AmjadIqbal\LaravelTiptap\View\Components\TiptapEditor;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Cache\RateLimiting\Limit;
 
 class TiptapServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/tiptap.php', 'tiptap');
+        $this->mergeConfigFrom(__DIR__.'/../config/tiptap.php', 'tiptap');
 
         $this->app->singleton(Sanitizer::class, fn (): HtmlSanitizer => new HtmlSanitizer(config('tiptap.security.allowed_tags', [])));
         $this->app->singleton(ContentParserContract::class, DefaultContentParser::class);
@@ -49,18 +49,18 @@ class TiptapServiceProvider extends ServiceProvider
             return Limit::perMinute((int) config('tiptap.route.uploads_per_minute', 30));
         });
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-tiptap');
-        $this->loadRoutesFrom(__DIR__ . '/../routes/tiptap.php');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-tiptap');
+        $this->loadRoutesFrom(__DIR__.'/../routes/tiptap.php');
 
         Blade::component('tiptap-editor', TiptapEditor::class);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/tiptap.php' => config_path('tiptap.php'),
+                __DIR__.'/../config/tiptap.php' => config_path('tiptap.php'),
             ], 'tiptap-config');
 
             $this->publishes([
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/laravel-tiptap'),
+                __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-tiptap'),
             ], 'tiptap-views');
 
             $this->commands([
