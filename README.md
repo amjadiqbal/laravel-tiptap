@@ -80,7 +80,7 @@ php artisan tiptap:debug
 ## Contributor test requirements
 
 - Package runtime support: PHP 8.2+
-- Local package test tooling (PHPUnit 12): PHP 8.3+
+- Local package test tooling (PHPUnit 11/12): PHP 8.2+
 
 ## Documentation
 
@@ -89,16 +89,18 @@ php artisan tiptap:debug
 - [Extension Creation Guide](docs/extensions.md)
 - [API Reference](docs/api-reference.md)
 - [Analysis of Existing Packages](docs/analysis-existing-packages.md)
+- [Changelog](CHANGELOG.md)
 
 ## CI/CD and versioning
 
-- CI workflow runs tests, Laravel Pint, and PHPStan
+- CI workflow runs tests, Laravel Pint, and PHPStan on PHP 8.2 and 8.3
 - Release workflow triggers on semantic version tags (`v*.*.*`)
 
 ## Support
 
-- Issues: https://github.com/amjadiqbal/laravel-tiptap/issues
-- Email: amjadiqbal@users.noreply.github.com
+- Issues: https://github.com/AmjadIqbal/laravel-tiptap/issues
+- Discord: https://discord.com/channels/1352854772859932702/1352854916690874388
+- Upwork: https://www.upwork.com/freelancers/amjadkhatri
 
 ## Community
 
