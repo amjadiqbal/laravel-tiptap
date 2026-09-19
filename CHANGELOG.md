@@ -5,6 +5,35 @@ All notable changes to `laravel-tiptap` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-09-19
+
+Found and fixed during manual integration testing against a fresh Laravel 13 / PHP 8.5
+install (before publishing to Laravel News).
+
+### Fixed
+- **`composer require amjadiqbal/laravel-tiptap` failed on the current Laravel release.**
+  `illuminate/contracts|support|http|routing` were capped at `^11.0|^12.0`; a fresh
+  Laravel 13 app pulls in `illuminate/*` `^13.x`, so resolution failed. The package's
+  code has no Laravel-13-specific incompatibility (verified: full test suite, Pint and
+  PHPStan level 6 all still pass unchanged), so this was a stale ceiling. Widened all
+  four to also accept `^13.0`.
+- **`<x-tiptap-editor>`'s hidden form field submitted the wrong value for plain string
+  content.** `resources/views/components/editor.blade.php` rendered the hidden input's
+  `value` with `@json($config['options']['content'] ?? null)`. For the common case —
+  `content` is a plain HTML string, e.g. `<p>hi</p>` — `@json()` wraps it in a literal
+  JSON string, producing `value='"<p>hi</p>"'` (quote characters included). Submitting
+  the form back to the server therefore delivered the string `"<p>hi</p>"`, not
+  `<p>hi</p>` — a real corruption of the saved content on every plain-text/HTML use of
+  the component, reproduced by rendering the component and inspecting the output HTML.
+  Array content (Tiptap JSON docs) still needs JSON encoding to round-trip correctly, so
+  the fix branches on `is_array()`: arrays are still `json_encode()`d, strings are now
+  emitted as-is (through Blade's normal HTML-attribute escaping).
+
+Manually verified after the fixes: `composer require` against a real Laravel 13 project,
+`Tiptap::make()->toArray()` via the facade on a real route, `tiptap:debug`, and
+`<x-tiptap-editor>` rendered from a real Blade view — the hidden input's value now
+round-trips the original content exactly.
+
 ## [1.0.0] - 2026-09-11
 
 First tagged release. The package had been on Packagist since April 2026 without a
